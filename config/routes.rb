@@ -1,6 +1,11 @@
 Rails.application.routes.draw do
   resources :tokens
-  resources :users
+  resources :users do
+    member do
+      post 'create_token'
+    end
+  end
+
   # The priority is based upon order of creation: first created -> highest priority.
   # See how all your routes lay out with "rake routes".
 

@@ -21,21 +21,22 @@ class TokensController < ApplicationController
   def edit
   end
 
+  # Creating tokens on model, keeping this here for reference
   # POST /tokens
   # POST /tokens.json
-  def create
-    @token = Token.new(token_params)
+  # def create
+  #   @token = Token.new(token_params)
 
-    respond_to do |format|
-      if @token.save
-        format.html { redirect_to @token, notice: 'Token was successfully created.' }
-        format.json { render :show, status: :created, location: @token }
-      else
-        format.html { render :new }
-        format.json { render json: @token.errors, status: :unprocessable_entity }
-      end
-    end
-  end
+  #   respond_to do |format|
+  #     if @token.save
+  #       format.html { redirect_to @token, notice: 'Token was successfully created.' }
+  #       format.json { render :show, status: :created, location: @token }
+  #     else
+  #       format.html { render :new }
+  #       format.json { render json: @token.errors, status: :unprocessable_entity }
+  #     end
+  #   end
+  # end
 
   # PATCH/PUT /tokens/1
   # PATCH/PUT /tokens/1.json

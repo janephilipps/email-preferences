@@ -37,6 +37,24 @@ class UsersController < ApplicationController
     end
   end
 
+  # POST /tokens
+  # POST /tokens.json
+  def create_token
+    @user = User.find(params[:id])
+    @token = Token.generate(@user)
+
+    # Save token to DB
+    respond_to do |format|
+      if @token.save
+        format.html { redirect_to @token, notice: 'Token was successfully created.' }
+        format.json { render :show, status: :created, location: @token }
+      else
+        format.html { render :new }
+        format.json { render json: @token.errors, status: :unprocessable_entity }
+      end
+    end
+  end
+
   # PATCH/PUT /users/1
   # PATCH/PUT /users/1.json
   def update
