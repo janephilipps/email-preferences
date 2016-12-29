@@ -20,6 +20,14 @@ class UsersController < ApplicationController
 
   # GET /users/1/edit
   def edit
+    current_user = User.find(params[:id])
+    current_token = params[:token]
+    token = Token.find(params[:token])
+
+    if (params[:email] != current_user.email or token.user_id != current_user.id)
+      # TODO: Handle error
+      p 'ERROR: Email doesn\'t match OR Token doesn\'t match user!'
+    end
   end
 
   # POST /users
