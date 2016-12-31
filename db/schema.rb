@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20161227012950) do
+ActiveRecord::Schema.define(version: 20161231212227) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -31,8 +31,9 @@ ActiveRecord::Schema.define(version: 20161227012950) do
     t.boolean  "marketing"
     t.boolean  "articles"
     t.boolean  "digest"
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
+    t.datetime "created_at",                   null: false
+    t.datetime "updated_at",                   null: false
+    t.boolean  "do_not_email", default: false
   end
 
   add_foreign_key "tokens", "users"
