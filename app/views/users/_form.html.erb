@@ -31,6 +31,8 @@
     <%= f.label :digest %><br>
     <%= f.check_box :digest %>
   </div>
+  <%= f.hidden_field :nonce, :value => params[:token] %>
+  <%= f.hidden_field :url_email, :value => params[:email] %>
   <div class="actions">
     <%= f.submit %>
   </div>

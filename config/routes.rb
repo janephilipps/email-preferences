@@ -1,5 +1,9 @@
 Rails.application.routes.draw do
-  resources :tokens
+  resources :tokens do
+    member do
+      post 'consume'
+    end
+  end
   resources :users do
     member do
       post 'create_token'

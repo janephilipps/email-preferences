@@ -49,6 +49,7 @@
       <tr>
         <td><%= token.user_id %></td>
         <td><%= token.nonce %></td>
+        <td><%= button_to 'Consume Token', consume_token_path(token) %></td>
       </tr>
     <% end %>
   </tbody>

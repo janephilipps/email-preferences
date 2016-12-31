@@ -13,4 +13,17 @@ class Token < ActiveRecord::Base
         })
         return token
     end
+
+    # Takes in a nonce
+    # Returns associated User or nil
+    def self.consume(nonce)
+        token = Token.find_by(nonce: nonce)
+        if token
+            user = User.find_by(id: token.user_id)
+            token.destroy
+            return user
+        else
+            return nil
+        end
+    end
 end

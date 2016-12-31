@@ -20,14 +20,7 @@ class UsersController < ApplicationController
 
   # GET /users/1/edit
   def edit
-    current_user = User.find(params[:id])
-    current_token = params[:token]
-    token = Token.find(params[:token])
 
-    if (params[:email] != current_user.email or token.user_id != current_user.id)
-      # TODO: Handle error
-      p 'ERROR: Email doesn\'t match OR Token doesn\'t match user!'
-    end
   end
 
   # POST /users
@@ -73,13 +66,20 @@ class UsersController < ApplicationController
   # PATCH/PUT /users/1
   # PATCH/PUT /users/1.json
   def update
-    respond_to do |format|
-      if @user.update(user_params)
-        format.html { redirect_to @user, notice: 'User was successfully updated.' }
-        format.json { render :show, status: :ok, location: @user }
-      else
-        format.html { render :edit }
-        format.json { render json: @user.errors, status: :unprocessable_entity }
+    user = Token.consume(params[:user][:nonce])
+
+    if (user == nil or params[:user][:url_email] != user.email or user.id.to_s != params[:id])
+      # TODO: Handle error
+      p 'ERROR: No user or email doesn\'t match or user id from token doesn\'t match current user!'
+    else
+      respond_to do |format|
+        if @user.update(user_params)
+          format.html { redirect_to @user, notice: 'User was successfully updated.' }
+          format.json { render :show, status: :ok, location: @user }
+        else
+          format.html { render :edit }
+          format.json { render json: @user.errors, status: :unprocessable_entity }
+        end
       end
     end
   end
