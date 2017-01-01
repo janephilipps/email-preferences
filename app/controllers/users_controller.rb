@@ -66,6 +66,15 @@ class UsersController < ApplicationController
   # PATCH/PUT /users/1
   # PATCH/PUT /users/1.json
   def update
+
+    updated_user = user_params
+
+    if params[:user][:do_not_email]
+      updated_user[:marketing] = '0'
+      updated_user[:articles] = '0'
+      updated_user[:digest] = '0'
+    end
+
     user = Token.consume(params[:user][:nonce])
 
     if (user == nil or params[:user][:url_email] != user.email or user.id.to_s != params[:id])
@@ -73,7 +82,7 @@ class UsersController < ApplicationController
       p 'ERROR: No user or email doesn\'t match or user id from token doesn\'t match current user!'
     else
       respond_to do |format|
-        if @user.update(user_params)
+        if @user.update(updated_user)
           format.html { redirect_to @user, notice: 'User was successfully updated.' }
           format.json { render :show, status: :ok, location: @user }
         else
@@ -102,6 +111,6 @@ class UsersController < ApplicationController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def user_params
-      params.require(:user).permit(:name, :email, :marketing, :articles, :digest)
+      params.require(:user).permit(:name, :email, :do_not_email, :marketing, :articles, :digest, :nonce, :url_email)
     end
 end
