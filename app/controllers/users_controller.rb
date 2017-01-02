@@ -26,9 +26,8 @@ class UsersController < ApplicationController
   # POST /users
   # POST /users.json
   def create
-    if User.exists?(email: params[:user][:email])
-      p 'User already exists!'
-      # TODO: Redirect to users/new for now, but needs to throw an error/alert
+    email_already_exists = email_already_exists?(params[:user][:email])
+    if email_already_exists
       redirect_to action: 'new'
     else
       @user = User.new(user_params)
@@ -69,7 +68,7 @@ class UsersController < ApplicationController
 
     updated_user = user_params
 
-    if params[:user][:do_not_email]
+    if params[:user][:do_not_email] == '1'
       updated_user[:marketing] = '0'
       updated_user[:articles] = '0'
       updated_user[:digest] = '0'
@@ -77,9 +76,17 @@ class UsersController < ApplicationController
 
     user = Token.consume(params[:user][:nonce])
 
-    if (user == nil or params[:user][:url_email] != user.email or user.id.to_s != params[:id])
-      # TODO: Handle error
-      p 'ERROR: No user or email doesn\'t match or user id from token doesn\'t match current user!'
+    if user == nil or user.id.to_s != params[:id] or params[:user][:url_email] != user.email
+      flash[:alert] = 'Access denied!'
+      redirect_to action: 'edit'
+      return
+    elsif user.email != params[:user][:email]
+      email_already_exists = email_already_exists?(params[:user][:email])
+      if email_already_exists
+        flash[:alert] = 'A user with that email address already exists!'
+        redirect_to action: 'edit'
+        return
+      end
     else
       respond_to do |format|
         if @user.update(updated_user)
@@ -111,6 +118,14 @@ class UsersController < ApplicationController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def user_params
-      params.require(:user).permit(:name, :email, :do_not_email, :marketing, :articles, :digest, :nonce, :url_email)
+      params.require(:user).permit(:name, :email, :do_not_email, :marketing, :articles, :digest)
+    end
+
+    # Check if a user is trying to create or edit with an email that is already in use
+    def email_already_exists?(email)
+      if User.exists?(email: email)
+        flash[:alert] = 'A user with that email address already exists!'
+        return flash
+      end
     end
 end
