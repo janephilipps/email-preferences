@@ -25,15 +25,15 @@
   </div>
   <div class="field">
     <%= f.label :marketing %><br>
-    <%= f.check_box :marketing %>
+    <%= f.check_box :marketing, :class => 'email' %>
   </div>
   <div class="field">
     <%= f.label :articles %><br>
-    <%= f.check_box :articles %>
+    <%= f.check_box :articles, :class => 'email' %>
   </div>
   <div class="field">
     <%= f.label :digest %><br>
-    <%= f.check_box :digest %>
+    <%= f.check_box :digest, :class => 'email' %>
   </div>
   <%= f.hidden_field :nonce, :value => params[:token] %>
   <%= f.hidden_field :url_email, :value => params[:email] %>
