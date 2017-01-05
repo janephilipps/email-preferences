@@ -11,32 +11,57 @@
     </div>
   <% end %>
 
-  <div class="field">
-    <%= f.label :name %><br>
+  <div class="field input">
+    <%= f.label :name %>
     <%= f.text_field :name %>
   </div>
-  <div class="field">
-    <%= f.label :email %><br>
+  <div class="field input">
+    <%= f.label :email %>
     <%= f.text_field :email %>
   </div>
-  <div class="field">
-    <%= f.label :do_not_email %><br>
-    <%= f.check_box :do_not_email %>
-  </div>
-  <div class="field">
-    <%= f.label :marketing %><br>
-    <%= f.check_box :marketing, :class => 'email' %>
-  </div>
-  <div class="field">
-    <%= f.label :articles %><br>
-    <%= f.check_box :articles, :class => 'email' %>
-  </div>
-  <div class="field">
-    <%= f.label :digest %><br>
-    <%= f.check_box :digest, :class => 'email' %>
+  <hr>
+  <h2 class="email-notifications">EMAIL NOTIFICATIONS</h2>
+  <div>
+    <table class="email-notifications-table">
+      <tbody>
+        <tr>
+          <td>
+            <div class="field">
+              <%= f.check_box :do_not_email %>
+              <label class="checkbox" for="user_do_not_email"><span></span></label>
+              <%= f.label :do_not_email %>
+            </div>
+          </td>
+          <td>
+            <div class="field">
+              <%= f.check_box :marketing, :class => 'email' %>
+              <label class="checkbox" for="user_marketing"><span></span></label>
+              <%= f.label :marketing %>
+            </div>
+          </td>
+        </tr>
+        <tr>
+          <td>
+            <div class="field">
+              <%= f.check_box :articles, :class => 'email' %>
+              <label class="checkbox" for="user_articles"><span></span></label>
+              <%= f.label :articles %>
+            </div>
+          </td>
+          <td>
+            <div class="field">
+              <%= f.check_box :digest, :class => 'email' %>
+              <label class="checkbox" for="user_digest"><span></span></label>
+              <%= f.label :digest %>
+            </div>
+          </td>
+        </tr>
+      </tbody>
+    </table>
   </div>
   <%= f.hidden_field :nonce, :value => params[:token] %>
   <%= f.hidden_field :url_email, :value => params[:email] %>
+  <hr>
   <div class="actions">
     <%= f.submit %>
   </div>

@@ -53,7 +53,7 @@ class UsersController < ApplicationController
     # Save token to DB
     respond_to do |format|
       if @token.save
-        format.html { redirect_to @token, notice: 'Token was successfully created.' }
+        format.html { redirect_to action: 'index'}
         format.json { render :show, status: :created, location: @token }
       else
         format.html { render :new }
