@@ -1,5 +1,11 @@
 body {
   background-color: #f7f7f7;
+  font-family: Arial, sans-serif;
+}
+
+a {
+  text-decoration: none;
+  color: #5B8AD8;
 }
 
 h1 {
@@ -8,8 +14,9 @@ h1 {
 
 h2 {
   color: #ED403A;
-  font-size: 14px;
+  font-size: 16px;
   letter-spacing: 1px;
+  margin: 0;
 }
 
 hr {
@@ -31,6 +38,7 @@ th {
 }
 
 .index {
+  width: 100%;
   border: 1px solid black;
 }
 
@@ -93,11 +101,14 @@ input[type=checkbox]:checked + label span {
 }
 
 .actions input[type=submit] {
+  padding: 20px 80px;
+}
+
+input[type=submit] {
   color: #FFF;
   background: #4E515C;
   border: none;
-  padding: 20px 80px;
-  font-size: 1rem;
+  font-size: 16px;
 }
 
 .alert .alert-alert {
