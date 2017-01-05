@@ -8,11 +8,6 @@ class UsersController < ApplicationController
     @tokens = Token.all
   end
 
-  # GET /users/1
-  # GET /users/1.json
-  def show
-  end
-
   # GET /users/new
   def new
     @user = User.new
@@ -20,7 +15,6 @@ class UsersController < ApplicationController
 
   # GET /users/1/edit
   def edit
-
   end
 
   # POST /users
@@ -34,7 +28,7 @@ class UsersController < ApplicationController
 
       respond_to do |format|
         if @user.save
-          format.html { redirect_to @user, notice: 'User was successfully created.' }
+          format.html { redirect_to action: 'index' }
           format.json { render :show, status: :created, location: @user }
         else
           format.html { render :new }
@@ -50,7 +44,6 @@ class UsersController < ApplicationController
     @user = User.find(params[:id])
     @token = Token.generate(@user)
 
-    # Save token to DB
     respond_to do |format|
       if @token.save
         format.html { redirect_to action: 'index'}
@@ -65,7 +58,6 @@ class UsersController < ApplicationController
   # PATCH/PUT /users/1
   # PATCH/PUT /users/1.json
   def update
-
     updated_user = user_params
 
     if params[:user][:do_not_email] == '1'
@@ -83,14 +75,13 @@ class UsersController < ApplicationController
     elsif user.email != params[:user][:email]
       email_already_exists = email_already_exists?(params[:user][:email])
       if email_already_exists
-        flash[:alert] = 'A user with that email address already exists!'
         redirect_to action: 'edit'
         return
       end
     else
       respond_to do |format|
         if @user.update(updated_user)
-          format.html { redirect_to @user, notice: 'User was successfully updated.' }
+          format.html { redirect_to action: 'index' }
           format.json { render :show, status: :ok, location: @user }
         else
           format.html { render :edit }
@@ -105,18 +96,16 @@ class UsersController < ApplicationController
   def destroy
     @user.destroy
     respond_to do |format|
-      format.html { redirect_to users_url, notice: 'User was successfully destroyed.' }
+      format.html { redirect_to users_url }
       format.json { head :no_content }
     end
   end
 
   private
-    # Use callbacks to share common setup or constraints between actions.
     def set_user
       @user = User.find(params[:id])
     end
 
-    # Never trust parameters from the scary internet, only allow the white list through.
     def user_params
       params.require(:user).permit(:name, :email, :do_not_email, :marketing, :articles, :digest)
     end
