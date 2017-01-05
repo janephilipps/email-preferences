@@ -3,11 +3,6 @@ body {
   font-family: Arial, sans-serif;
 }
 
-a {
-  text-decoration: none;
-  color: #5B8AD8;
-}
-
 h1 {
   font-size: 42px;
 }
@@ -32,39 +27,9 @@ th {
   text-align: left;
 }
 
-.user-info {
-    display: table-cell;
-    vertical-align: top;
-}
-
-.index {
-  width: 100%;
-  border: 1px solid black;
-}
-
-.container {
-  width: 960px;
-  margin: 0 auto;
-}
-
-.settings {
-  margin: 70px 0 30px;
-}
-
-.email-notifications {
-  margin-bottom: 50px;
-}
-
-.email-notifications-table {
-  margin: 0 auto;
-}
-
-.actions {
-  text-align: center;
-}
-
-.field.input {
-  text-align: center;
+a {
+  text-decoration: none;
+  color: #5B8AD8;
 }
 
 input[type=text] {
@@ -100,10 +65,6 @@ input[type=checkbox]:checked + label span {
   background:url(checkbox.png) center no-repeat;
 }
 
-.actions input[type=submit] {
-  padding: 20px 80px;
-}
-
 input[type=submit] {
   color: #FFF;
   background: #4E515C;
@@ -111,7 +72,41 @@ input[type=submit] {
   font-size: 16px;
 }
 
-.alert .alert-alert {
-  border: 2px solid red;
-  padding: 20px;
+.container {
+  width: 960px;
+  margin: 0 auto;
+}
+
+.settings {
+  margin: 70px 0 30px;
+}
+
+.user-info {
+  display: table-cell;
+  vertical-align: top;
+}
+
+.index {
+  width: 100%;
+  border: 1px solid black;
+}
+
+.email-notifications {
+  margin-bottom: 50px;
+}
+
+.email-notifications-table {
+  margin: 0 auto;
+}
+
+.actions {
+  text-align: center;
+}
+
+.actions input[type=submit] {
+  padding: 20px 80px;
+}
+
+.field.input {
+  text-align: center;
 }

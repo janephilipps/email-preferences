@@ -14,7 +14,7 @@ By [Jane Philipps](mailto:jane.philipps@gmail.com)
 6. Start server using `rails s`
 7. Navigate to app in [browser](http://localhost:3000/users).
 
-You will see a table of users with associated tokens for each user. You can use the button and links provided next to the user listing to create tokens associated with the user, edit the user (without URL params), show the user record, or delete the user record. You can use the link next to the token to edit the user (with URL params).
+You will see a table of users with associated tokens for each user. You can use the button and links provided next to the user listing to create tokens associated with the user, edit the user (without URL params, to make it easier to test without security), show the user record, or delete the user record. You can use the link next to the token to edit the user (with URL params, to make it easier to test with security).
 
 ## Discussion
 
