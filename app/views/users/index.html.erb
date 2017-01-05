@@ -25,6 +25,7 @@
         <td class="user-info"><%= user.articles %></td>
         <td class="user-info"><%= user.digest %></td>
         <td class="user-info"><%= link_to 'Edit', edit_user_path(user) %></td>
+        <td class="user-info"><%= link_to 'Show', user %></td>
         <td class="user-info"><%= link_to 'Delete', user, method: :delete, data: { confirm: 'Are you sure?' } %>
         <td class="user-info"><%= button_to 'Create Token', create_token_user_path(user)%></td>
         </td>
